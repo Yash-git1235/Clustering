@@ -20,15 +20,40 @@ bounding_box = Polygon(bounding_box_coords)
 
 # Latitude and longitude data (include some points outside the bounding box to test filtering)
 data = np.array([
-    [38.3158894, -76.5518986],
-    [38.3157856, -76.5522313],
-    [38.3157902, -76.5519936],
-    [38.315759, -76.552272],
-    [38.3157564, -76.5522055],
-    [38.3157147, -76.5518794],
-    [38.3157567, -76.5518732],
-    [38.3157422, -76.5520774]
+    # 10 points outside the bounding box
+    (38.315200, -76.550500),
+    (38.315300, -76.553000),
+    (38.316000, -76.552800),
+    (38.316500, -76.551200),
+    (38.315900, -76.550400),
+    (38.315000, -76.551000),
+    (38.316100, -76.552000),
+    (38.315100, -76.552600),
+    (38.316200, -76.553000),
+    (38.315800, -76.550100),
+    # 20 points inside the bounding box
+    (38.315500, -76.551500),
+    (38.315620, -76.551700),
+    (38.315430, -76.551900),
+    (38.315780, -76.552300),
+    (38.315500, -76.552000),
+    (38.315600, -76.551850),
+    (38.315700, -76.552100),
+    (38.315620, -76.552450),
+    (38.315470, -76.551600),
+    (38.315550, -76.551800),
+    (38.315560, -76.552200),
+    (38.315630, -76.552000),
+    (38.315750, -76.552250),
+    (38.315800, -76.551750),
+    (38.315650, -76.551900),
+    (38.315540, -76.551990),
+    (38.315710, -76.552150),
+    (38.315670, -76.552300),
+    (38.315450, -76.551800),
+    (38.315590, -76.552100)
 ])
+
 
 # Filter points to keep only those inside the bounding box
 filtered_data = np.array([point for point in data if bounding_box.contains(Point(point[0], point[1]))])
@@ -60,6 +85,7 @@ else:
             centroids.append(centroid)
         centroids = np.array(centroids)
         filtered_data = np.array(centroids)
+        print(thr)
         thr+=5
 
     # Initialize Folium map centered around the bounding box area
